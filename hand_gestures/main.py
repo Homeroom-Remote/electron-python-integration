@@ -15,7 +15,7 @@ mpDraw = mp.solutions.drawing_utils
 
 # Load the gesture recognizer model
 model = load_model('./hand_gestures/mp_hand_gesture')
-
+print(model)
 # Load class names
 f = open('./hand_gestures/gesture.names', 'r')
 classNames = f.read().split('\n')
@@ -56,6 +56,7 @@ while True:
             mpDraw.draw_landmarks(frame, handslms, mpHands.HAND_CONNECTIONS)
 
             # Predict gesture
+            if not model.predict: continue
             prediction = model.predict([landmarks])
             # print(prediction)
             classID = np.argmax(prediction)  # Owen missed...
